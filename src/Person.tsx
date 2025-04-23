@@ -22,18 +22,24 @@ interface personProps {
 
 export const Person = ({ name, age, isMarried }: personProps) => {
   const [personBio, setPersonBio] = useState<string | null>(null);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPersonBio(event.target.value);
+  };
+
   return (
     <div>
       <p>Name: {name}</p>
       <p>age: {age}</p>
       <p>This person is {isMarried ? "Married" : "Single"}</p>
-
       <p>
         {" "}
         {name} Bio: {!personBio ? "No Bio Available" : personBio}
       </p>
+      {/* In inline arrow function typescript will automatically infer the type of item as an React.ChangeEvent<HTMLInputElement> */}
+      {/* <input onChange={(item) => setPersonBio(item.target.value)} /> */}
 
-      <input />
+      <input onChange={handleChange} />
     </div>
   );
 };
